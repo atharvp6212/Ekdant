@@ -120,49 +120,57 @@
         </div>
     </section>
 
-    <section class="contact-form-section" id="start">
-        <div class="container1">
-            <h2>Let us know what you are looking for</h2>
-            <form  method="post" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit" onclick="SendMail()">Send Message</button>
-            </form>
-        </div>
-    </section>
+<section class="contact-form-section" id="start">
+    <div class="container1">
+        <h2>Let us know what you are looking for</h2>
+        <form id="contactForm" method="post" class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </div>
+</section>
 
-    <script>
-        function SendMail() {
-            var params = {
-                Name: document.getElementById("name").value,
-                Email: document.getElementById("email").value,
-                Number: document.getElementById("phone").value,
-                Message: document.getElementById("message").value
-            };
-            emailjs.send('service_rbxw2mv', 'template_g8aex63', params).then(
-                (response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                },
-                (error) => {
-                    console.log('FAILED...', error);
-                }
-            );
-        }
-    </script>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the default way
+
+        var params = {
+            Name: document.getElementById("name").value,
+            Email: document.getElementById("email").value,
+            Number: document.getElementById("phone").value,
+            Message: document.getElementById("message").value
+        };
+
+        emailjs.send('service_rbxw2mv', 'template_g8aex63', params).then(
+            (response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Message sent successfully!');
+                // Optionally reset the form after successful submission
+                document.getElementById('contactForm').reset();
+            },
+            (error) => {
+                console.log('FAILED...', error);
+                alert('Failed to send message. Please try again later.');
+            }
+        );
+    });
+</script>
+
     
 
     <footer class="footer">
