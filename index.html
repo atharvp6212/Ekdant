@@ -3,30 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Header</title>
+    <title>Ekdant</title>
     <link rel="stylesheet" href="css.css"> <!-- Link to your CSS file -->
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+	</script>
+	<script type="text/javascript">
+	(function(){
+		emailjs.init({
+			publicKey: "v1cmfhRMpNqL0hqeM",
+		});
+	})();
+	</script>
 </head>
 <body>
     <header>
-        <div class="container">
-            <!-- Company Logo -->
+        <div class="container1">
             <div class="logo">
-                <a href="#"><img src="images/logo.png" alt="Company Logo"></a> <!-- Replace logo.png with your logo file -->
+                <img src="images/logo.png" alt="Logo">
             </div>
-            <!-- Navigation Menu -->
+            <div class="menu-toggle">&#9776;</div>
             <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#team">Our Team</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </nav>
-            <!-- Call-to-Action Button -->
-            <a href="#start" class="cta-btn">Get Started</a>
         </div>
     </header>
+    
 
     <section class="hero-section">
         <div class="hero-overlay">
@@ -78,15 +86,14 @@
                     <h3>Phone</h3>
                     <p>+91 9921887615</p> <!-- Replace with your phone number -->
                 </div>
-                
-                </div>
                 <div class="contact-item">
                     <h3>Email</h3>
-                    <p><a href="mailto:contact@company.com">atharvp11@gmail.com</a></p> <!-- Replace with your email -->
+                    <p><a href="mailto:atharvp11@gmail.com">atharvp11@gmail.com</a></p> <!-- Replace with your email -->
                 </div>
             </div>
         </div>
     </section>
+    
 
     <section class="team-section" id="team">
         <div class="container">
@@ -114,9 +121,9 @@
     </section>
 
     <section class="contact-form-section" id="start">
-        <div class="container">
+        <div class="container1">
             <h2>Let us know what you are looking for</h2>
-            <form action="submit_form.php" method="post" class="contact-form">
+            <form  method="post" class="contact-form">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
@@ -137,6 +144,26 @@
             </form>
         </div>
     </section>
+
+    <script>
+        function SendMail() {
+            var params = {
+                Name: document.getElementById("name").value,
+                Email: document.getElementById("email").value,
+                Phone: document.getElementById("phone").value,
+                Message: document.getElementById("message").value
+            };
+            emailjs.send('service_rbxw2mv', 'template_g8aex63', params).then(
+                (response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                },
+                (error) => {
+                    console.log('FAILED...', error);
+                }
+            );
+        }
+    </script>
+    
 
     <footer class="footer">
         <div class="container">
@@ -162,17 +189,19 @@
                 </div>
 
                 <!-- Social Media -->
-                <div class="footer-social">
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        <a href="https://facebook.com" target="_blank" class="social-icon"><img src="facebook-icon.png" alt="Facebook"></a> <!-- Replace with actual social media icons -->
-                        <a href="https://twitter.com" target="_blank" class="social-icon"><img src="twitter-icon.png" alt="Twitter"></a>
-                        <a href="https://linkedin.com" target="_blank" class="social-icon"><img src="linkedin-icon.png" alt="LinkedIn"></a>
-                        <a href="https://instagram.com" target="_blank" class="social-icon"><img src="instagram-icon.png" alt="Instagram"></a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </footer>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        menuToggle.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('show-menu');
+        });
+    });
+</script>
